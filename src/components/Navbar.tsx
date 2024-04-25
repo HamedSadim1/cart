@@ -4,7 +4,6 @@ const Navbar = () => {
   const {
     cartQuery: { totalQuantity },
   } = useCartQueryStore();
-  console.log(totalQuantity);
 
   return (
     <nav>
