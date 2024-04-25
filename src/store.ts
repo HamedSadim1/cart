@@ -38,9 +38,11 @@ const useCartQueryStore = create<CartQueryStore>((set) => {
           carts: state.cartQuery.carts.filter((cart) => cart.id !== id),
           total:
             state.cartQuery.total -
-            state.cartQuery.carts.find((cart) => cart.id === id)?.amount! *
+            (state.cartQuery.carts.find((cart) => cart.id === id)?.amount ||
+              0) *
               parseFloat(
-                state.cartQuery.carts.find((cart) => cart.id === id)?.price!
+                state.cartQuery.carts.find((cart) => cart.id === id)?.price ||
+                  "0"
               ),
           totalQuantity:
             state.cartQuery.totalQuantity -
@@ -58,7 +60,7 @@ const useCartQueryStore = create<CartQueryStore>((set) => {
           total:
             state.cartQuery.total +
             parseFloat(
-              state.cartQuery.carts.find((cart) => cart.id === id)?.price!
+              state.cartQuery.carts.find((cart) => cart.id === id)?.price || "0"
             ),
           totalQuantity: state.cartQuery.totalQuantity + 1,
         },
@@ -74,7 +76,7 @@ const useCartQueryStore = create<CartQueryStore>((set) => {
           total:
             state.cartQuery.total -
             parseFloat(
-              state.cartQuery.carts.find((cart) => cart.id === id)?.price!
+              state.cartQuery.carts.find((cart) => cart.id === id)?.price || "0"
             ),
           totalQuantity: state.cartQuery.totalQuantity - 1,
         },
